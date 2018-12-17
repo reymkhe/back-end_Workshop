@@ -25,7 +25,7 @@ public class Triangle implements Polygon {
             this.b = b;
             this.c = c;
         } else {
-            throw new TriangleException("not exist");
+            throw new TriangleException();
         }
     }
 

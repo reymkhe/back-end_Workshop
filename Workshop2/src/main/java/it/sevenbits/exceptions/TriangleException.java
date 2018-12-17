@@ -5,5 +5,4 @@ package it.sevenbits.exceptions;
  */
 public class TriangleException extends Exception {
 
-    TriangleException;
 }
