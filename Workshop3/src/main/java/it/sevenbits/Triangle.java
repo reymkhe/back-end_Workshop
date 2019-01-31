@@ -2,6 +2,8 @@ package it.sevenbits;
 
 import it.sevenbits.exceptions.TriangleException;
 
+import java.util.Objects;
+
 /**
  * Triangle set by lengths of three sides
  */
@@ -42,5 +44,20 @@ public class Triangle implements Polygon {
         StringBuilder sb = new StringBuilder();
         sb.append(a).append(", ").append(b).append(", ").append(c);
         return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Triangle triangle = (Triangle) o;
+        return a == triangle.a &&
+                b == triangle.b &&
+                c == triangle.c;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(a, b, c);
     }
 }

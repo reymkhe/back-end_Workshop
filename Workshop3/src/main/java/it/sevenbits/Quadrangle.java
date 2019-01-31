@@ -1,6 +1,8 @@
 package it.sevenbits;
 
 
+import java.util.Objects;
+
 /**
  * Quadrangle set by lengths of four sides
  */
@@ -38,5 +40,21 @@ public class Quadrangle implements Polygon {
         StringBuilder sb = new StringBuilder();
         sb.append(a).append(", ").append(b).append(", ").append(c).append(", ").append(d);
         return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Quadrangle that = (Quadrangle) o;
+        return a == that.a &&
+                b == that.b &&
+                c == that.c &&
+                d == that.d;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(a, b, c, d);
     }
 }

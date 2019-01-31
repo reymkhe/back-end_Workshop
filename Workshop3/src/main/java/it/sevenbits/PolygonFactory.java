@@ -45,9 +45,7 @@ public class PolygonFactory {
      * @throws NumberFormatException when variable in the file not Integer
      */
     public List<Polygon> getPolygonsFromFile(final String path) throws TriangleException, IOException, NumberFormatException {
-        File file = new File(path);
-        FileReader fileReader = new FileReader(file);
-        LineNumberReader lineNumberReader = new LineNumberReader(fileReader);
+        LineNumberReader lineNumberReader = new LineNumberReader(new FileReader( new File(path)));
         String line;
         List <Polygon> polygons = new ArrayList<>();
         while ((line = lineNumberReader.readLine()) != null) {

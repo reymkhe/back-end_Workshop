@@ -4,7 +4,6 @@ import it.sevenbits.exceptions.TriangleException;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +14,6 @@ import java.util.List;
 public class PolygonFactoryTest {
 
     PolygonFactory factory = new PolygonFactory();
-    FileWriter fileWriter;
 
     /**
      * Simple positive test. All conditions for the existence of polygons are met.
@@ -25,14 +23,11 @@ public class PolygonFactoryTest {
      */
     @Test
     public void listShouldHaveSomePolygons() throws IOException, TriangleException {
-        fileWriter = new FileWriter("Polygons for test");
-        fileWriter.write("6 4 8\n2 3 5 2");
-        fileWriter.close();
         List<Polygon> expectedPoligons = new ArrayList<Polygon>() {{
             add(new Triangle(6, 4, 8));
             add(new Quadrangle(2, 3, 5, 2));
         }};
-        List<Polygon> actualPoligons = factory.getPolygonsFromFile("Polygons for test");
+        List<Polygon> actualPoligons = factory.getPolygonsFromFile("testFiles/ListShouldHaveSomePolygons");
 
         Assert.assertArrayEquals(expectedPoligons.toArray(), actualPoligons.toArray());
     }
@@ -46,13 +41,10 @@ public class PolygonFactoryTest {
      */
     @Test
     public void listShouldHaveOnlyOnePolygon() throws IOException, TriangleException {
-        fileWriter = new FileWriter("Polygons for test");
-        fileWriter.write("6 4\n2 3 5 2\n5 6");
-        fileWriter.close();
         List<Polygon> expectedPoligons = new ArrayList<Polygon>() {{
             add(new Quadrangle(2, 3, 5, 2));
         }};
-        List<Polygon> actualPoligons = factory.getPolygonsFromFile("Polygons for test");
+        List<Polygon> actualPoligons = factory.getPolygonsFromFile("testFiles/ListShouldHaveOnlyOnePolygon");
 
         Assert.assertArrayEquals(expectedPoligons.toArray(), actualPoligons.toArray());
     }
@@ -66,11 +58,8 @@ public class PolygonFactoryTest {
      */
     @Test
     public void canNotCreatePolygons() throws IOException, TriangleException {
-        fileWriter = new FileWriter("Polygons for test");
-        fileWriter.write("6 4\n2 3 5 2 5\n1 2 ");
-        fileWriter.close();
         List<Polygon> expectedPoligons = new ArrayList<Polygon>() {{}};
-        List<Polygon> actualPoligons = factory.getPolygonsFromFile("Polygons for test");
+        List<Polygon> actualPoligons = factory.getPolygonsFromFile("testFiles/CanNotCreatePolygons");
 
         Assert.assertArrayEquals(expectedPoligons.toArray(), actualPoligons.toArray());
     }
@@ -84,11 +73,8 @@ public class PolygonFactoryTest {
      */
     @Test
     public void canNotUseLineFromFile() throws IOException, TriangleException {
-        fileWriter = new FileWriter("Polygons for test");
-        fileWriter.write("6,4,3,5\n6,4,8");
-        fileWriter.close();
         List<Polygon> expectedPoligons = new ArrayList<Polygon>() {{}};
-        List<Polygon> actualPoligons = factory.getPolygonsFromFile("Polygons for test");
+        List<Polygon> actualPoligons = factory.getPolygonsFromFile("testFiles/CanNotUseLineFromFile");
 
         Assert.assertArrayEquals(expectedPoligons.toArray(), actualPoligons.toArray());
     }
@@ -108,10 +94,7 @@ public class PolygonFactoryTest {
      */
     @Test (expected = TriangleException.class)
     public void triangleIsNotExist() throws IOException, TriangleException {
-        fileWriter = new FileWriter("Polygons for test");
-        fileWriter.write("0 4 5\n1 2 3");
-        fileWriter.close();
-        factory.getPolygonsFromFile("Polygons for test");
+        factory.getPolygonsFromFile("testFiles/TriangleIsNotExist");
     }
 
     /**
@@ -120,10 +103,7 @@ public class PolygonFactoryTest {
      */
     @Test (expected = NumberFormatException.class)
     public void stringDataInFile() throws IOException, TriangleException, NumberFormatException {
-        fileWriter = new FileWriter("Polygons for test");
-        fileWriter.write("six four eleven");
-        fileWriter.close();
-        factory.getPolygonsFromFile("Polygons for test");
+        factory.getPolygonsFromFile("testFiles/StringDataInFile");
     }
 }
 
