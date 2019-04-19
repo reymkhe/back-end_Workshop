@@ -130,6 +130,7 @@ public class SwapperTest {
         list.add("Ag");
         list.add("aa");
         list.add("Bj");
+        list.add("ab");
 
         List<String> expectedList = new ArrayList<>();
         expectedList.add("aa");
@@ -137,34 +138,58 @@ public class SwapperTest {
         expectedList.add("Ag");
         expectedList.add("aB");
         expectedList.add("Bj");
+        expectedList.add("ab");
 
         List<String> actualList = swapper.doSwap(list);
         Assert.assertArrayEquals(expectedList.toArray(), actualList.toArray());
     }
 
+    /**
+     * Test for doSwap function using array with elements consisting of special characters
+     */
+    @Test
+    public void usingSpecialCharactersTest() {
+        List<String> list = new ArrayList<>();
+        list.add("@#");
+        list.add("@@");
+        list.add("#$");
+        list.add("#!");
+        list.add("###");
+        list.add("&^");
 
-//    /**
-//     *
-//     */
-//    @Test
-//    public void arrayWithNullStringsTest() {
-//        List<String> list = new ArrayList<>();
-//        list.add("aa");
-//        list.add("ab");
-//        list.add("");
-//        list.add("cb");
-//        list.add("");
-//
-//        List<String> expectedList = new ArrayList<>();
-//        expectedList.add("ab");
-//        expectedList.add("aa");
-//        expectedList.add("");
-//        expectedList.add("cb");
-//        expectedList.add("");
-//
-//        List<String> actualList = swapper.doSwap(list);
-//        Assert.assertArrayEquals(expectedList.toArray(), actualList.toArray());
-//    }
+        List<String> expectedList = new ArrayList<>();
+        expectedList.add("@@");
+        expectedList.add("@#");
+        expectedList.add("#!");
+        expectedList.add("#$");
+        expectedList.add("###");
+        expectedList.add("&^");
 
+        List<String> actualList = swapper.doSwap(list);
+        Assert.assertArrayEquals(expectedList.toArray(), actualList.toArray());
+    }
+
+    /**
+     * Test for doSwap function using array with empty strings
+     */
+    @Test
+    public void arrayWithNullStringsTest() {
+        List<String> list = new ArrayList<>();
+        list.add("aa");
+        list.add("ab");
+        list.add("");
+        list.add("cb");
+        list.add("");
+
+        List<String> expectedList = new ArrayList<>();
+        expectedList.add("ab");
+        expectedList.add("aa");
+        expectedList.add("");
+        expectedList.add("cb");
+        expectedList.add("");
+
+        List<String> actualList = swapper.doSwap(list);
+        Assert.assertArrayEquals(expectedList.toArray(), actualList.toArray());
+    }
 }
 
